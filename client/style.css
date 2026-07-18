@@ -1,0 +1,227 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f1f3f6;
+  --panel-bg: #ffffff;
+  --border: #dbe0e6;
+  --text: #1d2733;
+  --text-muted: #6b7684;
+  --accent: #3a86ff;
+  --danger: #e63946;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  overflow: hidden;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* ---------------- Toolbar ---------------- */
+#toolbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 16px;
+  background: var(--panel-bg);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  z-index: 10;
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbar-right {
+  margin-left: auto;
+}
+
+.toolbar-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.tool-btn, .action-btn {
+  border: 1px solid var(--border);
+  background: #fafbfc;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.tool-btn:hover, .action-btn:hover {
+  background: #eef1f5;
+}
+
+.tool-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#color-picker {
+  width: 34px;
+  height: 30px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px;
+  background: none;
+  cursor: pointer;
+}
+
+#width-slider {
+  width: 110px;
+}
+
+#width-value {
+  font-size: 13px;
+  color: var(--text-muted);
+  min-width: 32px;
+}
+
+.status-pill {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.status-connecting {
+  background: #fff3cd;
+  color: #8a6800;
+}
+
+.status-connected {
+  background: #d4f5e2;
+  color: #0f7a44;
+}
+
+.status-disconnected {
+  background: #fde2e2;
+  color: var(--danger);
+}
+
+/* ---------------- Main area ---------------- */
+#main-area {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+#presence-panel {
+  width: 200px;
+  background: var(--panel-bg);
+  border-right: 1px solid var(--border);
+  padding: 14px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+#presence-panel h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+
+#presence-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.presence-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.presence-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.presence-item.is-you {
+  font-weight: 600;
+}
+
+/* ---------------- Canvas stage ---------------- */
+#canvas-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 16px;
+  min-width: 0;
+}
+
+#canvas-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  aspect-ratio: 16 / 9;
+  background: white;
+  box-shadow: 0 2px 18px rgba(20, 30, 45, 0.12);
+  border-radius: 6px;
+  overflow: hidden;
+  touch-action: none;
+}
+
+#base-canvas, #live-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#live-canvas {
+  pointer-events: none; /* pointer events are captured by the stage, canvas is just a paint surface */
+}
+
+#debug-overlay {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  background: rgba(20, 24, 30, 0.82);
+  color: #d8f0ff;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  line-height: 1.6;
+  pointer-events: none;
+}
+
+.hidden {
+  display: none !important;
+}

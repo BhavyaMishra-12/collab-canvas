@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Collaborative Canvas</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header id="toolbar">
+      <div class="toolbar-group" role="group" aria-label="Tools">
+        <button id="tool-brush" class="tool-btn active" data-tool="brush" title="Brush">✏️ Brush</button>
+        <button id="tool-eraser" class="tool-btn" data-tool="eraser" title="Eraser">🧽 Eraser</button>
+      </div>
+
+      <div class="toolbar-group">
+        <label class="toolbar-label" for="color-picker">Color</label>
+        <input type="color" id="color-picker" value="#1d3557" />
+      </div>
+
+      <div class="toolbar-group">
+        <label class="toolbar-label" for="width-slider">Width</label>
+        <input type="range" id="width-slider" min="1" max="48" value="6" />
+        <span id="width-value">6px</span>
+      </div>
+
+      <div class="toolbar-group">
+        <button id="undo-btn" class="action-btn" title="Undo (global, affects everyone)">↶ Undo</button>
+        <button id="redo-btn" class="action-btn" title="Redo (global, affects everyone)">↷ Redo</button>
+      </div>
+
+      <div class="toolbar-group toolbar-right">
+        <div id="connection-status" class="status-pill status-connecting">connecting…</div>
+        <button id="debug-toggle" class="action-btn" title="Toggle debug overlay">📊 Debug</button>
+      </div>
+    </header>
+
+    <div id="main-area">
+      <aside id="presence-panel">
+        <h2>Online</h2>
+        <ul id="presence-list"></ul>
+      </aside>
+
+      <div id="canvas-wrap">
+        <div id="canvas-stage">
+          <canvas id="base-canvas"></canvas>
+          <canvas id="live-canvas"></canvas>
+        </div>
+        <div id="debug-overlay" class="hidden">
+          <div>FPS: <span id="debug-fps">--</span></div>
+          <div>Ping: <span id="debug-ping">--</span> ms</div>
+          <div>Ops: <span id="debug-ops">0</span></div>
+          <div>Users: <span id="debug-users">0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="websocket.js"></script>
+  <script src="canvas.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
